@@ -25,6 +25,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashComponent } from './components/dash/dash.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -56,7 +58,9 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
     BrowserAnimationsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    ReactiveFormsModule,
+    HttpClientModule
 
   ],
   providers: [],

@@ -7,6 +7,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { DashComponent } from './components/dash/dash.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -35,13 +36,19 @@ const routes: Routes = [
       },
       {
         path: 'tasks',
-        component: TasksComponent
+        component: TasksComponent,
+        canActivate: [AuthGuard]
+
       },
       {
         path: 'profile',
-        component: ProfileComponent
+        component: ProfileComponent,
+        canActivate: [AuthGuard]
+
       },
     ],
+    canActivate: [AuthGuard]
+
 
   },
 

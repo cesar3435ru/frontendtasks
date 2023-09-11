@@ -6,23 +6,33 @@
             alt="..."> -->
             <img src="/assets/images/checklist.svg" class="card-img-top" alt="...">
             <div class="card-body">
-                <form method="POST" class="row g-2" enctype="multipart/form-data">
+                <form [formGroup]="loginForm" (ngSubmit)="startLogin()" class="row g-2">
                     <div class="form-floating col-md-12">
-                        <input type="email" class="form-control" placeholder="Write your email" name="email"
-                            maxlength="50">
-                        <label for="floatingInput">Email*</label>
+                        <input type="email" class="form-control" placeholder="Write your email" name="email" id="email"
+                            autocomplete="email" formControlName="email" maxlength="50">
+                        <label for="email">Email*</label>
+                        <div *ngIf="validInput('email')" class="form-text text-danger">Email is required.
+                        </div>
                     </div>
 
                     <a class="leftText" routerLink="/reset-password" [routerLinkActive]="['active']">Forgot your
                         password?</a>
 
                     <div class="form-floating col-md-12">
-                        <input [type]="showPassword ? 'text' : 'password'" id="password" class="form-control"
-                            placeholder="Write your password" name="password">
+                        <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                            class="form-control" placeholder="Write your password" id="password">
                         <span class="toggle-password" (click)="togglePassword()">
                             <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
                         </span>
-                        <label for="floatingInput">Password*</label>
+                        <label for="password">Password*</label>
+                        <!-- <div *ngIf="validInput('password')" class="form-text text-danger">Password is required
+                        </div> -->
+                        <div *ngIf="validInput('password')" class="form-text text-danger">
+                            <span *ngIf="loginForm.get('password')?.hasError('required')">Password is required.</span>
+                            <span *ngIf="loginForm.get('password')?.hasError('minlength')">Password must be at least 10
+                                characters long.</span>
+                        </div>
+
                     </div>
                     <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -31,7 +41,8 @@
                         </label>
                     </div>
                     <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-cloud"></i> Login</button>
+                        <button type="submit" class="btn btn-outline-primary" [disabled]="loginForm.invalid"> <i
+                                class="fa-solid fa-cloud"></i> Login</button>
                     </div>
                     <div class="centerText">
                         <br>
