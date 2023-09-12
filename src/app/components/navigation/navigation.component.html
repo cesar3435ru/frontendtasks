@@ -1,28 +1,64 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
-    <mat-toolbar>Dashboard</mat-toolbar>
+  <mat-sidenav #drawer class="sidenav bg-success" fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false">
+    <mat-toolbar class="text-white">Dashboard</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item href="#">Link 1</a>
       <a mat-list-item href="#">Link 2</a>
       <a mat-list-item href="#">Link 3</a>
       <a mat-list-item routerLink="./tasks" [routerLinkActive]="['active']"><i class="fa-solid fa-list-check"></i>
         Tasks</a>
-      <!-- <a mat-list-item routerLink="/register" [routerLinkActive]="['active']"><i class="fa-solid fa-user-plus"></i>
-        Register</a> -->
-      <!-- <a mat-list-item routerLink="/login" [routerLinkActive]="['active']"><i class="fa-solid fa-play"></i> Login</a> -->
-      <a mat-list-item routerLink="./profile" [routerLinkActive]="['active']"><i class="fa-solid fa-user-shield"></i> Profile info</a>
+      <a mat-list-item routerLink="./profile" [routerLinkActive]="['active']"><i class="fa-solid fa-user-shield"></i>
+        Profile info</a>
       <a mat-list-item (click)="confirmAction()"><i class="fa-solid fa-skull"></i> Logout</a>
 
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+    <mat-toolbar class="bg-primary">
+      <!-- <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button> -->
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
+
       <span>Task App</span>
+
+      <!-- <button type="button" aria-label="Toggle sidenav" mat-icon-button class="left-btn">
+        <mat-icon aria-label="Side nav toggle icon">person</mat-icon>
+      </button> -->
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu" class="left-btn">
+        <mat-icon>account_circle</mat-icon>
+        <!-- <mat-icon>person</mat-icon> -->
+
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon>person</mat-icon>
+          <span>{{userData?.name}} {{userData?.lastname}}</span>
+        </button>
+        <button mat-menu-item [routerLink]="['./profile']">
+          <mat-icon>info</mat-icon>
+          <span>Info</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>notifications</mat-icon>
+          <span>Alerts</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>settings</mat-icon>
+          <span>Settings</span>
+        </button>
+
+        <button mat-menu-item (click)="confirmAction()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+        
+      </mat-menu>
     </mat-toolbar>
     <!-- Add Content Here -->
     <!-- <app-dashboard></app-dashboard> -->

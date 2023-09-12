@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit{
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -19,10 +19,11 @@ export class NavigationComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private rou: Router, private userS : UserService) {}
+  constructor(private breakpointObserver: BreakpointObserver, private rou: Router, private userS: UserService) { }
 
-  
-
+  ngOnInit(): void {
+    this.getUser();
+  }
   logOut() {
     this.userS.logOut().subscribe(
       (response) => {
@@ -59,5 +60,15 @@ export class NavigationComponent {
       }
     });
   }
+
+  userData: any = {};
+  getUser() {
+    const userL = JSON.parse(localStorage.getItem('user') || '[]');
+    this.userData = userL;
+    console.log(this.userData);
+
+
+  }
+
 
 }
