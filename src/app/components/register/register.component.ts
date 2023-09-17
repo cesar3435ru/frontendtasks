@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
     Swal.fire({
       position: 'center',
       icon: 'success',
-      title: 'Login successfully!!!',
+      title: 'User has been registered successfully!!!',
       showConfirmButton: false,
       timer: 1500
     })
@@ -88,12 +88,22 @@ export class RegisterComponent implements OnInit {
     return control.errors && control.touched;
   }
 
-
   saveData() {
-    if (this.myForm.valid) {
-      console.log(this.myForm.value);
+    if (this.myForm && this.myForm.valid) {
+      const formData = {
+        email: this.myForm.get('email')!.value,
+        name: this.myForm.get('name')!.value,
+        lastname: this.myForm.get('lastname')!.value,
+        age: this.myForm.get('age')!.value,
+        password: this.myForm.get('password')!.value,
+      };      
+      this.user.addUser(formData).subscribe(response => {
+        console.log('Well donde');
+      });
       this.myForm.reset();
       this.updateProgress();
+      this.rou.navigate(['/login']);
+      this.goodNot();
     }
   }
 

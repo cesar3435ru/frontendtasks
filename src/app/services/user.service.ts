@@ -34,12 +34,10 @@ export class UserService {
 
   
 
-  //Guardar token en localStorage
   saveToken(token: string) {
     localStorage.setItem('token', token);
   }
 
-  //Guardar datos del usuario en localStorage
   saveUser(user: any) {
     localStorage.setItem('user', JSON.stringify(user));
 
@@ -47,8 +45,6 @@ export class UserService {
 
 
 
-
-  //Comprobar si esta autenticado el  usuario
   isAuth(): boolean {
     this.token = localStorage.getItem('token') || null;
     this.user = JSON.parse(localStorage.getItem('user') || 'null') || null;
@@ -64,11 +60,9 @@ export class UserService {
 
   logOut(): Observable<any> {
     const token = localStorage.getItem('token');
-    // console.log(token);
 
     if (this.isAuth() && token) {
 
-      // console.log('Entro al if');
       //Set up the headers with the token
       const headers = new HttpHeaders({
         'Authorization': `Bearer ${token}`
@@ -78,6 +72,10 @@ export class UserService {
     } else {
       return new Observable(); //Return something
     }
+  }
+
+  addUser(user: any) {
+    return this.http.post(this.api + '/api/register', user);
   }
 
 }
