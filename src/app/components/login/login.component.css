@@ -1,36 +1,41 @@
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
 
-  .toggle-password {
-    position: absolute;
-    top: 50%;
-    right: 10px;
-    transform: translateY(-50%);
-    cursor: pointer;
-  }
-  
-  .centerText{
-    text-align: center;
-  }
+.centerText {
+  text-align: center;
+}
 
-  .leftText{
-    text-align: end;
-  }
+.leftText {
+  text-align: end;
+}
 
-  .container {
-    display: grid;
-    place-items: center; 
-  }
-  
-  a {
-    text-decoration: none; /* Elimina la subrayado en todos los enlaces */
-  }
+.container {
+  display: grid;
+  place-items: center;
+}
 
-  .login-component {
-    /* Agrega el enlace a tu imagen de fondo y establece otras propiedades CSS según sea necesario */
-    background-image: url('/assets/images/three.svg'); /* Cambia 'ruta-a-tu-imagen.svg' a la ruta real de tu imagen */
-    background-size: cover; /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
-    background-repeat: no-repeat; /* Evita la repetición de la imagen de fondo */
-    background-position: center; /* Centra la imagen horizontalmente y verticalmente */
-  }
-  
+a {
+  text-decoration: none;
+  /* Elimina la subrayado en todos los enlaces */
+}
 
-  
+.login-component {
+  /* Agrega el enlace a tu imagen de fondo y establece otras propiedades CSS según sea necesario */
+  background-image: url('/assets/images/three.svg');
+  /* Cambia 'ruta-a-tu-imagen.svg' a la ruta real de tu imagen */
+  background-size: cover;
+  /* Ajusta el tamaño de la imagen para cubrir todo el fondo */
+  background-repeat: no-repeat;
+  /* Evita la repetición de la imagen de fondo */
+  background-position: center;
+  /* Centra la imagen horizontalmente y verticalmente */
+}
+
+.effect-eye:hover {
+  color: blue;
+}

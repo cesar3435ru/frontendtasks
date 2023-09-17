@@ -21,8 +21,8 @@
                     <div class="form-floating col-md-12">
                         <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
                             class="form-control" placeholder="Write your password" id="password">
-                        <span class="toggle-password" (click)="togglePassword()">
-                            <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+                        <span class="toggle-password effect-eye" (click)="togglePassword()">
+                            <i [class]="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
                         </span>
                         <label for="password">Password*</label>
                         <!-- <div *ngIf="validInput('password')" class="form-text text-danger">Password is required

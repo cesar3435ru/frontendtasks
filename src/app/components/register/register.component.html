@@ -1,1 +1,114 @@
-<p>register works!</p>
+<br>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card bg-light">
+                <div class="card-body">
+                    <h1 class="center">Fill this form</h1>
+                    <div *ngIf="showProgressBar" class="progress mt-3">
+                        <div class="progress-bar" [style.width.%]="progress" role="progressbar" [attr.aria-valuenow]="progress"
+                            aria-valuemin="0" aria-valuemax="100">
+                            This is your progress {{ progress }}%
+                        </div>
+                    </div>
+                    <br>                    
+                    <form [formGroup]="myForm" (ngSubmit)="saveData()" class="row g-2">
+                        <div class="form-floating col-md-6">
+                            <input type="text" class="form-control" id="name" autocomplete="true" formControlName="name"
+                                placeholder="Write your name" (change)="updateProgress()">
+                            <label for="name">Name*</label>
+                            <div *ngIf="validateInput('name')" class="form-text text-danger">Name is required.
+                            </div>
+                        </div>
+
+                        <div class="form-floating col-md-6">
+                            <input type="text" class="form-control" id="lastname" autocomplete="true"
+                                formControlName="lastname" placeholder="Write your lastname"
+                                (change)="updateProgress()">
+                            <label for="lastname">Lastname*</label>
+                            <div *ngIf="validateInput('lastname')" class="form-text text-danger">Lastname is required.
+                            </div>
+                        </div>
+
+                        <div class="form-floating col-md-6">
+                            <input type="number" class="form-control" id="age" autocomplete="true" formControlName="age"
+                                placeholder="Write your age" (change)="updateProgress()">
+                            <label for="age">Age*</label>
+                            <div *ngIf="validateInput('age')" class="form-text text-danger">Age is required.
+                            </div>
+                        </div>
+
+                        <div class="form-floating col-md-6">
+                            <input type="email" class="form-control" placeholder="Write your email" id="email"
+                                autocomplete="true" formControlName="email" maxlength="50" (change)="updateProgress()">
+                            <label for="email">Email*</label>
+                            <div *ngIf="validateInput('email')" class="form-text text-danger">Email is required.
+                            </div>
+                        </div>
+
+                        <div class="form-floating col-md-6">
+                            <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                                class="form-control" placeholder="Write your password" id="password"
+                                (change)="updateProgress()">
+                            <div class="input-group-append">
+                                <span class="input-group-text toggle-password effect-eye" (click)="togglePassword()">
+                                    <i [class]="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
+                                </span>
+                            </div>
+                            <label for="password">Password*</label>
+                            <div *ngIf="validateInput('password')" class="form-text text-danger">
+                                <span *ngIf="myForm.get('password')?.hasError('required')">Password is
+                                    required.</span>
+                                <span *ngIf="myForm.get('password')?.hasError('minlength')">Password must be at least
+                                    10
+                                    characters long.</span>
+                            </div>
+                        </div>
+
+    
+                        <div class="form-floating col-md-6">
+                            <input [type]="showPasswordTwo ? 'text' : 'password'" formControlName="cpassword"
+                                class="form-control" placeholder="Confirm your password" id="cpassword"
+                                (change)="updateProgress()">
+                            <div class="input-group-append">
+                                <span class="input-group-text toggle-passwordtwo effect-eye" (click)="togglePasswordTwo()">
+                                    <i [class]="showPasswordTwo ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
+                                </span>
+                            </div>
+                            <label for="cpassword"> Confirm Password*</label>
+                            <div *ngIf="myForm.get('cpassword')?.invalid && myForm.get('cpassword')?.touched"
+                                class="error-message" class="form-text text-danger">Confirmation password is required.
+                            </div>
+                            <div *ngIf="myForm.get('cpassword')?.hasError('minlength')" class="error-message"
+                                class="form-text text-danger">Password must be at least
+                                10 characters long.
+                            </div>
+                            <div *ngIf="this.myForm.get('cpassword')?.dirty && this.myForm.hasError('passwordsNotMatching')"
+                                class="error-message" class="form-text text-danger">Passwords are not matching.</div>
+                        </div>
+
+
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"
+                                (change)="updateProgress()" formControlName="termsAndConditions">
+                            <label class="form-check-label magic" for="flexCheckDefault">
+                                Accept the Terms and Conditions.
+                            </label>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-outline-primary" [disabled]="myForm.invalid"> <i
+                                    class="fa-solid fa-cloud"></i> Save</button>
+                        </div>
+                        <div class="rightText">
+                            <a class="magic" routerLink="/login" [routerLinkActive]="['active']">Already have an
+                                account? Sign in</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

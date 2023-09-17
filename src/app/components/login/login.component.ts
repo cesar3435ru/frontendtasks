@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
     const control = this.loginForm.controls[input];
     
     if (!control) {
-      return false; // El control no existe, por lo que no hay errores
+      return false; // The control does not exist and no errors
     }
   
     if (input === 'password' && control.errors) {

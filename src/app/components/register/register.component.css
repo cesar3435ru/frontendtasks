@@ -1,0 +1,46 @@
+.center {
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.magic:hover {
+    color: black;
+    /* font-weight: bold; */
+    font-family: 'Courier New', Courier, monospace;
+}
+.effect-eye:hover{
+    background-color: rgb(102, 201, 166);
+
+}
+
+.rightText {
+    text-align: end;
+}
+
+/* .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+} */
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    line-height: 0;
+}
+
+.toggle-passwordtwo {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    line-height: 0;
+}
