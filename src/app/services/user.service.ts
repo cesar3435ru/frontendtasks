@@ -10,7 +10,8 @@ import { map } from 'rxjs/operators';
 export class UserService {
   public isAuthenticated = new BehaviorSubject<boolean>(false); // Propiedad de autenticación
 
-
+  private tasksSubject: Subject<void> = new Subject<void>();
+  private taskDeletedSubject: Subject<void> = new Subject<void>();
   private api = AppSettings.readAppSettings().taskSettings.apiURL;
 
   token: any = '';
@@ -76,6 +77,66 @@ export class UserService {
 
   addUser(user: any) {
     return this.http.post(this.api + '/api/register', user);
+  }
+
+  addTask(formData: FormData): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (this.isAuth() && token) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });  
+      return this.http.post(this.api + '/api/addtask', formData, { headers }).pipe(
+        map((response: any) => {
+          this.tasksSubject.next();
+          return response;
+        })
+      );
+    } else {
+      return new Observable();
+    }
+  }
+
+  getTasksObservable(): Observable<void> {
+    return this.tasksSubject.asObservable();
+  }
+
+
+  getAllTasksByUser(): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (this.isAuth() && token) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+      console.log('token', headers);
+      return this.http.get(this.api + `/api/tasks`, { headers });
+    } else {
+      return new Observable();
+    }
+  }
+
+  deleteTaskByUser(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+
+    if (this.isAuth() && token) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+
+      const url = `${this.api}/api/tasks/${id}`;
+
+      return this.http.delete(url, { headers }).pipe(
+        map((response: any) => {
+          this.taskDeletedSubject.next();
+          return response;
+        })
+      );
+    } else {
+      return new Observable();
+    }
+  }
+
+  getTasksDeletedObservable(): Observable<void> {
+    return this.taskDeletedSubject.asObservable();
   }
 
 }

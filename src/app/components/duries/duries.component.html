@@ -1,0 +1,95 @@
+<br>
+<div class="container">
+    <button type="button" (click)="toggleForm()" class="btn btn-outline-success"> <i
+            class="fa-solid fa-square-plus"></i> Add Task</button>
+</div>
+<br>
+<div *ngIf="showForm">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card bg-light">
+                    <div class="card-body">
+                        <h1 class="center">Fill this form</h1>
+                        <div *ngIf="showProgressBar" class="progress mt-3">
+                            <div class="progress-bar" [style.width.%]="progress" role="progressbar"
+                                [attr.aria-valuenow]="progress" aria-valuemin="0" aria-valuemax="100">
+                                This is your progress {{ progress }}%
+                            </div>
+                        </div>
+                        <br>
+                        <form [formGroup]="taskForm" (ngSubmit)="saveTask()" class="row g-2">
+                            <div class="form-floating col-md-6">
+                                <input type="text" class="form-control" id="name" autocomplete="true"
+                                    formControlName="name" placeholder="Write your task" (change)="updateProgress()">
+                                <label for="name">Task Name*</label>
+                                <div *ngIf="validateInput('name')" class="form-text text-danger">Task Name is required.
+                                </div>
+                            </div>
+
+                            <div class="form-floating col-md-6">
+                                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
+                                    formControlName="desc" (change)="updateProgress()"></textarea>
+                                <label for="floatingTextarea">Description</label>
+                                <div *ngIf="validateInput('desc')" class="form-text text-danger">Description Task is
+                                    required.
+                                </div>
+                            </div>
+
+
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-outline-primary" [disabled]="taskForm.invalid"> <i
+                                        class="fa-solid fa-cloud"></i> Save</button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="table-responsive">
+        <table id="tasks" class="table table-striped table-hover table-bordered shadow-lg mt-4" style="width:100%">
+            <thead class="table-danger text-white">
+                <tr>
+                    <th scope="col">Task Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let t of tasks | paginate: { itemsPerPage: 3, currentPage: p }">
+                    <td>{{t.name}}</td>
+                    <td>{{t.desc}}</td>
+                    <td>
+                        <button class="btn btn-outline-primary" type="submit"><i class="fas fa-fw fa-pencil"></i>
+                            Edit</button>
+                        <button class="btn btn-outline-success separate" type="submit"><i class="fas fa-fw fa-check"></i>
+                            Done</button>
+                        <button class="btn btn-outline-danger" type="submit" (click)="confirmarAlert(t.id)"><i class="fas fa-fw fa-trash"></i>
+                            Delete</button>
+
+                    </td>
+                </tr>
+            </tbody>
+            <!-- Mensaje cuando no hay resultados -->
+            <ng-template #noResults>
+                <tbody>
+                    <tr>
+                        <td colspan="3" class="text-center">NO HAY REGISTROS</td>
+                    </tr>
+                </tbody>
+            </ng-template>
+
+        </table>
+
+        <pagination-controls class="page" (pageChange)="p = $event"></pagination-controls>
+
+    </div>
+
+</div>

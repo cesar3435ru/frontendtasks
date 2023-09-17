@@ -8,6 +8,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { DashComponent } from './components/dash/dash.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { AuthGuard } from './guards/auth.guard';
+import { DuriesComponent } from './components/duries/duries.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,12 @@ const routes: Routes = [
       {
         path: 'profile',
         component: ProfileComponent,
+        canActivate: [AuthGuard]
+
+      },
+      {
+        path: 'duries',
+        component: DuriesComponent,
         canActivate: [AuthGuard]
 
       },
