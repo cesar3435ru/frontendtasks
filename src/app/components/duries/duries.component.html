@@ -52,7 +52,14 @@
 </div>
 
 <div class="container">
-    <div class="table-responsive">
+    <div class="input-group">
+        <input class="form-control" type="text" [(ngModel)]="searchTerm" placeholder="Search task..." id="searchTerm">
+        <span class="toggle-search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </span>
+    </div>
+
+    <div class="table-responsive" *ngIf="tasks.length > 0">
         <table id="tasks" class="table table-striped table-hover table-bordered shadow-lg mt-4" style="width:100%">
             <thead class="table-danger text-white">
                 <tr>
@@ -62,26 +69,27 @@
                 </tr>
             </thead>
 
-            <tbody>
-                <tr *ngFor="let t of tasks | paginate: { itemsPerPage: 3, currentPage: p }">
+            <tbody *ngIf="getFilteredTasks().length > 0; else noResults">
+                <tr *ngFor="let t of getFilteredTasks() | paginate: { itemsPerPage: 3, currentPage: p }">
                     <td>{{t.name}}</td>
                     <td>{{t.desc}}</td>
                     <td>
                         <button class="btn btn-outline-primary" type="submit"><i class="fas fa-fw fa-pencil"></i>
                             Edit</button>
-                        <button class="btn btn-outline-success separate" type="submit"><i class="fas fa-fw fa-check"></i>
+                        <button class="btn btn-outline-success separate" type="submit"><i
+                                class="fas fa-fw fa-check"></i>
                             Done</button>
-                        <button class="btn btn-outline-danger" type="submit" (click)="confirmarAlert(t.id)"><i class="fas fa-fw fa-trash"></i>
+                        <button class="btn btn-outline-danger" type="submit" (click)="confirmarAlert(t.id)"><i
+                                class="fas fa-fw fa-trash"></i>
                             Delete</button>
 
                     </td>
                 </tr>
             </tbody>
-            <!-- Mensaje cuando no hay resultados -->
             <ng-template #noResults>
                 <tbody>
                     <tr>
-                        <td colspan="3" class="text-center">NO HAY REGISTROS</td>
+                        <td colspan="3" class="text-center">NO RESULTS</td>
                     </tr>
                 </tbody>
             </ng-template>
@@ -90,6 +98,11 @@
 
         <pagination-controls class="page" (pageChange)="p = $event"></pagination-controls>
 
+    </div>
+    <br>
+    <div *ngIf="tasks.length === 0" class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Hoops babe!</strong> You still don't have any tasks.
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
 </div>

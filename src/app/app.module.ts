@@ -25,7 +25,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { DashComponent } from './components/dash/dash.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DuriesComponent } from './components/duries/duries.component';
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -63,6 +63,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
     MatPaginatorModule,
     MatSortModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     NgxPaginationModule
 

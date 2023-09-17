@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder} from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './duries.component.html',
   styleUrls: ['./duries.component.css']
 })
-export class DuriesComponent implements OnInit{
+export class DuriesComponent implements OnInit {
   private taskAddedSubscription: Subscription;
   private taskDeletedSubscription: Subscription;
 
@@ -23,9 +23,10 @@ export class DuriesComponent implements OnInit{
     this.taskDeletedSubscription = this.user.getTasksDeletedObservable().subscribe(() => {
       this.showTasks();
     });
-   }
+  }
   showForm = false;
-  p: number = 1; 
+  p: number = 1;
+  searchTerm: string = '';
 
   tasks: any[] = [];
   toggleForm() {
@@ -53,6 +54,8 @@ export class DuriesComponent implements OnInit{
       (data) => {
         this.tasks = data.tasks;
         console.log('my data', this.tasks);
+        this.getFilteredTasks();
+
       },
       (error) => {
         console.error('Error:', error);
@@ -65,6 +68,21 @@ export class DuriesComponent implements OnInit{
     const completedFields = Object.values(this.taskForm.controls).filter(control => control.valid).length;
     this.progress = (completedFields / totalFields) * 100;
   }
+
+  filterTasks() {
+    if (this.tasks && this.tasks.length > 0) {
+      return this.tasks.filter(task =>
+        task.name.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    } else {
+      return [];
+    }
+  }
+  getFilteredTasks() {
+    const filteredTasks = this.filterTasks();
+    return filteredTasks.slice();
+  }
+
 
   goodNot() {
     Swal.fire({
@@ -100,28 +118,28 @@ export class DuriesComponent implements OnInit{
 
   });
 
-  validateInput(inputTask: string){
+  validateInput(inputTask: string) {
     return this.taskForm.controls[inputTask].errors && this.taskForm.controls[inputTask].touched
 
   }
 
   saveTask() {
     const formData = new FormData();
-    
-    formData.append('name', this.taskForm.get('name')?.value);    
-    formData.append('desc', this.taskForm.get('desc')?.value);    
+
+    formData.append('name', this.taskForm.get('name')?.value);
+    formData.append('desc', this.taskForm.get('desc')?.value);
 
     this.user.addTask(formData).subscribe(
       (response) => {
         console.log('Backend responds:', response);
-        this.goodNot();        
+        this.goodNot();
       },
       (error) => {
         console.error('Error backend:', error);
       }
     );
     this.taskForm.reset();
-    this.updateProgress(); 
+    this.updateProgress();
   }
 
   deleteTask(id: number) {
