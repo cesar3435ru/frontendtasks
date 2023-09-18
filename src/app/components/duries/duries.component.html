@@ -76,10 +76,12 @@
                     <td>
                         <button class="btn btn-outline-primary" type="submit"><i class="fas fa-fw fa-pencil"></i>
                             Edit</button>
-                        <button class="btn btn-outline-success separate" type="submit"><i
+                        <button class="btn btn-outline-success separate" type="submit" (click)="wellDone(t.id)" [disabled]="t.isButtonClicked"><i
                                 class="fas fa-fw fa-check"></i>
-                            Done</button>
-                        <button class="btn btn-outline-danger" type="submit" (click)="confirmarAlert(t.id)"><i
+                                <span *ngIf="!t.isButtonClicked">Done</span>
+                                <span *ngIf="t.isButtonClicked">Good Job</span>
+                        </button>
+                        <button class="btn btn-outline-danger" type="submit" (click)="confirmAlert(t.id)"><i
                                 class="fas fa-fw fa-trash"></i>
                             Delete</button>
 

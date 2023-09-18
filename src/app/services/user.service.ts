@@ -139,4 +139,37 @@ export class UserService {
     return this.taskDeletedSubject.asObservable();
   }
 
+  markAsADone(id: number): Observable<any> {
+  
+    const token = localStorage.getItem('token'); 
+
+    if (this.isAuth() && token) {
+  
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+      const body = { razon: "jdkfjdlk" }
+      return this.http.put(this.api + `/api/taskdone/${id}`, body, { headers });
+    } else {
+      return new Observable();
+    }
+  }
+
+  getTaskStatus(id: number): Observable<any> {
+  
+    const token = localStorage.getItem('token'); 
+
+    if (this.isAuth() && token) {
+  
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+      const body = { razon: "jdkfjdlk" }
+      return this.http.get(this.api + `/api/taskstatus/${id}`,{ headers });
+    } else {
+      return new Observable();
+    }
+  }
+
+
 }

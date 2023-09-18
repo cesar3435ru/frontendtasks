@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
+import { Store } from '@ngxs/store';
+import { SetButtonClicked } from '../../status/your-state.state';
 
 @Component({
   selector: 'app-duries',
@@ -11,18 +13,25 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./duries.component.css']
 })
 export class DuriesComponent implements OnInit {
+
+  isButtonClicked: false;
+  // isButtonClicked: boolean = false;
+
+
   private taskAddedSubscription: Subscription;
   private taskDeletedSubscription: Subscription;
 
 
 
-  constructor(private theForm: FormBuilder, private user: UserService, private rou: Router) {
+  constructor(private theForm: FormBuilder, private user: UserService, private rou: Router, private store: Store) {
     this.taskAddedSubscription = this.user.getTasksObservable().subscribe(() => {
       this.showTasks();
     });
     this.taskDeletedSubscription = this.user.getTasksDeletedObservable().subscribe(() => {
       this.showTasks();
     });
+    this.isButtonClicked = this.store.selectSnapshot(state => state.isButtonClicked);
+
   }
   showForm = false;
   p: number = 1;
@@ -39,9 +48,9 @@ export class DuriesComponent implements OnInit {
     this.taskForm.valueChanges.subscribe(() => {
       this.showProgressBar = true;
     });
-
     this.showTasks();
   }
+
 
   ngOnDestroy(): void {
     this.taskAddedSubscription.unsubscribe();
@@ -153,7 +162,7 @@ export class DuriesComponent implements OnInit {
     );
   }
 
-  confirmarAlert(id: number) {
+  confirmAlert(id: number) {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -168,6 +177,70 @@ export class DuriesComponent implements OnInit {
       }
     });
   }
+
+  goodEffort() {
+    Swal.fire({
+      position: 'center',
+      icon: 'success',
+      title: 'Task done successfully!!!',
+      showConfirmButton: false,
+      timer: 1500
+    })
+  }
+
+  // isButtonDisabled = false;
+  // isButtonClicked = false;
+
+  // markTask(id: number) {
+  //   this.user.markAsADone(id).subscribe(
+  //     () => {
+  //       this.goodEffort();
+  //       this.store.dispatch(new SetButtonClicked(true));
+  //     },
+  //     (error) => {
+  //       console.error('Error:', error);
+  //     }
+  //   );
+  // }
+
+  test(taskId: number) {
+    const onetask = this.tasks.find(t => t.id === taskId);
+    if (onetask) {
+      this.user.markAsADone(taskId).subscribe(
+        () => {
+          this.goodEffort();
+          // onetask.isButtonClicked = true;
+          this.store.dispatch(new SetButtonClicked(true));
+          const currentState = this.store.snapshot(); // O utiliza selectSnapshot según tu preferencia
+          console.log('Estado actual:', currentState)
+
+        },
+        (error) => {
+          console.error('Error:', error);
+        }
+      );
+
+    }
+  }
+
+
+  wellDone(id: number) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, do it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.test(id);
+      }
+    });
+  }
+
+
 
 
 }
