@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
-import { Store } from '@ngxs/store';
-import { SetButtonClicked } from '../../status/your-state.state';
 
 @Component({
   selector: 'app-duries',
@@ -14,8 +12,6 @@ import { SetButtonClicked } from '../../status/your-state.state';
 })
 export class DuriesComponent implements OnInit {
 
-  isButtonClicked: false;
-  // isButtonClicked: boolean = false;
 
 
   private taskAddedSubscription: Subscription;
@@ -23,14 +19,13 @@ export class DuriesComponent implements OnInit {
 
 
 
-  constructor(private theForm: FormBuilder, private user: UserService, private rou: Router, private store: Store) {
+  constructor(private theForm: FormBuilder, private user: UserService, private rou: Router) {
     this.taskAddedSubscription = this.user.getTasksObservable().subscribe(() => {
       this.showTasks();
     });
     this.taskDeletedSubscription = this.user.getTasksDeletedObservable().subscribe(() => {
       this.showTasks();
     });
-    this.isButtonClicked = this.store.selectSnapshot(state => state.isButtonClicked);
 
   }
   showForm = false;
@@ -188,46 +183,32 @@ export class DuriesComponent implements OnInit {
     })
   }
 
-  // isButtonDisabled = false;
-  // isButtonClicked = false;
 
-  // markTask(id: number) {
-  //   this.user.markAsADone(id).subscribe(
-  //     () => {
-  //       this.goodEffort();
-  //       this.store.dispatch(new SetButtonClicked(true));
-  //     },
-  //     (error) => {
-  //       console.error('Error:', error);
-  //     }
-  //   );
-  // }
-
-  test(taskId: number) {
-    const onetask = this.tasks.find(t => t.id === taskId);
-    if (onetask) {
-      this.user.markAsADone(taskId).subscribe(
-        () => {
-          this.goodEffort();
-          // onetask.isButtonClicked = true;
-          this.store.dispatch(new SetButtonClicked(true));
-          const currentState = this.store.snapshot(); // O utiliza selectSnapshot según tu preferencia
-          console.log('Estado actual:', currentState)
-
-        },
-        (error) => {
-          console.error('Error:', error);
+  markTask(id: number) {
+    this.user.markAsADone(id).subscribe(
+      (resp) => {
+        const indexObj = this.tasks.findIndex(object => object.id === id);
+        if (indexObj !== -1) {
+          if (this.tasks[indexObj].completed == 0) {
+            this.tasks[indexObj].completed = 1;
+          } else if (this.tasks[indexObj].completed == 1) {
+            this.tasks[indexObj].completed = 0;
+          }
         }
-      );
+        console.log(resp);
 
-    }
+        this.goodEffort();
+      },
+      (error) => {
+        console.error('Error:', error);
+      }
+    );
   }
 
 
   wellDone(id: number) {
     Swal.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
+      title: 'Are you sure to mark this task as a done?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',
@@ -235,7 +216,7 @@ export class DuriesComponent implements OnInit {
       confirmButtonText: 'Yes, do it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.test(id);
+        this.markTask(id);
       }
     });
   }

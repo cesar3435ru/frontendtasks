@@ -29,8 +29,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DuriesComponent } from './components/duries/duries.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { NgxsModule } from '@ngxs/store';
-import { YourState } from './status/your-state.state';
 
 
 
@@ -68,8 +66,7 @@ import { YourState } from './status/your-state.state';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule,
-    NgxsModule.forRoot([YourState])
+    NgxPaginationModule
 
   ],
   providers: [],
