@@ -34,7 +34,7 @@ export class DuriesComponent implements OnInit {
 
   tasks: any[] = [];
   toggleForm() {
-    this.showForm = !this.showForm; // Mostrar u ocultar el formulario al hacer clic en el botón
+    this.showForm = !this.showForm;
   }
   progress: number = 0;
   showProgressBar = false;
@@ -222,6 +222,10 @@ export class DuriesComponent implements OnInit {
   }
 
 
+  editTask(id: number){
+    console.log('TESING', id);
+    this.rou.navigateByUrl(`home/edittask/${id}`); 
+  }
 
 
 }

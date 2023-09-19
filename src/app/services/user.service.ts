@@ -172,4 +172,31 @@ export class UserService {
   }
 
 
+  getTaskOnlyId(id: number): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (this.isAuth() && token) {
+
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+      return this.http.get(this.api + `/api/tasks/${id}`, { headers });
+    } else {
+      return new Observable();
+    }
+
+  }
+
+  updateTaskById(id: number, formData: FormData): Observable<any> {
+    const token = localStorage.getItem('token');
+    if (this.isAuth() && token) {
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+      return this.http.put(this.api + `/api/edittask/${id}`, formData, { headers });
+    } else {
+      return new Observable();
+    }
+  }
+
+
 }

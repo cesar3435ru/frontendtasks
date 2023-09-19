@@ -9,6 +9,7 @@ import { DashComponent } from './components/dash/dash.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { AuthGuard } from './guards/auth.guard';
 import { DuriesComponent } from './components/duries/duries.component';
+import { EdittaskComponent } from './components/edittask/edittask.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,12 @@ const routes: Routes = [
       {
         path: 'duries',
         component: DuriesComponent,
+        canActivate: [AuthGuard]
+
+      },
+      {
+        path: 'edittask/:id',
+        component: EdittaskComponent,
         canActivate: [AuthGuard]
 
       },

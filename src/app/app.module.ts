@@ -29,6 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DuriesComponent } from './components/duries/duries.component';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { EdittaskComponent } from './components/edittask/edittask.component';
 
 
 
@@ -44,7 +45,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     LoginComponent,
     DashComponent,
     ResetPasswordComponent,
-    DuriesComponent
+    DuriesComponent,
+    EdittaskComponent
   ],
   imports: [
     BrowserModule,
