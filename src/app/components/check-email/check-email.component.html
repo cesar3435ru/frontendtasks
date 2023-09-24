@@ -1,0 +1,34 @@
+<div class="my-background">
+    <div class="container">
+        <div class="card" style="width: 20rem;">
+            <div class="card-body">
+                <h3> Forgot your password? No problem. Just let us know your email address to start the process and you
+                    can reset your password quickly.
+                </h3>
+                <form [formGroup]="emailForm" (ngSubmit)="sendData()" class="row g-2">
+                    <div class="form-floating col-md-12">
+                        <input type="email" class="form-control" placeholder="Write your email" name="email" id="email"
+                            autocomplete="email" formControlName="email" maxlength="50">
+                        <label for="email">Email*</label>
+                        <div *ngIf="validateInput('email')" class="form-text text-danger">Email is required.
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-outline-primary" [disabled]="emailForm.invalid"> <i
+                                class="fa-solid fa-glasses"></i> Verify</button>
+                    </div>
+                    <div class="centerText magic">
+                        <br>
+                        <a routerLink="/login" [routerLinkActive]="['active']">Sign in?</a>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <br>
+    <br>
+    <br>
+</div>

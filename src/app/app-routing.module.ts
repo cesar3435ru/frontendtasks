@@ -10,6 +10,7 @@ import { ResetPasswordComponent } from './components/reset-password/reset-passwo
 import { AuthGuard } from './guards/auth.guard';
 import { DuriesComponent } from './components/duries/duries.component';
 import { EdittaskComponent } from './components/edittask/edittask.component';
+import { CheckEmailComponent } from './components/check-email/check-email.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,11 @@ const routes: Routes = [
   {
     path: 'reset-password',
     component: ResetPasswordComponent
+  },
+  {
+    path: 'verifyemail',
+    component: CheckEmailComponent
+
   },
   {
     path: 'home',

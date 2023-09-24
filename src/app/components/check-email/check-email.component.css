@@ -6,8 +6,11 @@
   cursor: pointer;
 }
 
-.centerText {
+.centerText{
   text-align: center;
+}
+.magic:hover {
+  font-weight: bold;
 }
 
 .leftText {
@@ -17,28 +20,36 @@
 .container {
   display: grid;
   place-items: center;
+  height: 100vh;
 }
+
 
 a {
   text-decoration: none;
 }
 
-.login-component {
-  background-image: url('/assets/images/three.svg');
-  background-size: cover;
+
+.my-background {
+  background-image: url('/assets/images/good.svg');
+  /* background-size: contain; */
+  background-size: 100% 100%;
+  /* background-size: cover; */
   background-repeat: no-repeat;
+  background-attachment: fixed;
   background-position: center;
   overflow: hidden;
   height: 100vh;
-  
+
   @media (max-width: 768px) {
-    background: linear-gradient(to bottom, #ea506c, #4784ff);
+    background: linear-gradient(to bottom, #ff6347, #4169e1);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: center;
     background-size: cover;
   }
 }
+
+
 
 .effect-eye:hover {
   color: blue;

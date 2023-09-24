@@ -30,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DuriesComponent } from './components/duries/duries.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { EdittaskComponent } from './components/edittask/edittask.component';
+import { CheckEmailComponent } from './components/check-email/check-email.component';
 
 
 
@@ -46,7 +47,8 @@ import { EdittaskComponent } from './components/edittask/edittask.component';
     DashComponent,
     ResetPasswordComponent,
     DuriesComponent,
-    EdittaskComponent
+    EdittaskComponent,
+    CheckEmailComponent
   ],
   imports: [
     BrowserModule,
