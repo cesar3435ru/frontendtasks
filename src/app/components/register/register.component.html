@@ -6,12 +6,12 @@
                 <div class="card-body">
                     <h1 class="center">Fill this form</h1>
                     <div *ngIf="showProgressBar" class="progress mt-3">
-                        <div class="progress-bar" [style.width.%]="progress" role="progressbar" [attr.aria-valuenow]="progress"
-                            aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar" [style.width.%]="progress" role="progressbar"
+                            [attr.aria-valuenow]="progress" aria-valuemin="0" aria-valuemax="100">
                             This is your progress {{ progress }}%
                         </div>
                     </div>
-                    <br>                    
+                    <br>
                     <form [formGroup]="myForm" (ngSubmit)="saveData()" class="row g-2">
                         <div class="form-floating col-md-6">
                             <input type="text" class="form-control" id="name" autocomplete="true" formControlName="name"
@@ -65,26 +65,29 @@
                             </div>
                         </div>
 
-    
+
                         <div class="form-floating col-md-6">
                             <input [type]="showPasswordTwo ? 'text' : 'password'" formControlName="cpassword"
                                 class="form-control" placeholder="Confirm your password" id="cpassword"
                                 (change)="updateProgress()">
                             <div class="input-group-append">
-                                <span class="input-group-text toggle-passwordtwo effect-eye" (click)="togglePasswordTwo()">
+                                <span class="input-group-text toggle-passwordtwo effect-eye"
+                                    (click)="togglePasswordTwo()">
                                     <i [class]="showPasswordTwo ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
                                 </span>
                             </div>
                             <label for="cpassword"> Confirm Password*</label>
-                            <div *ngIf="myForm.get('cpassword')?.invalid && myForm.get('cpassword')?.touched"
-                                class="error-message" class="form-text text-danger">Confirmation password is required.
-                            </div>
-                            <div *ngIf="myForm.get('cpassword')?.hasError('minlength')" class="error-message"
-                                class="form-text text-danger">Password must be at least
-                                10 characters long.
+                            <div *ngIf="validateInput('cpassword')" class="form-text text-danger">
+                                <span *ngIf="myForm.get('cpassword')?.hasError('required')">Password is
+                                    required.</span>
+                                <span *ngIf="myForm.get('cpassword')?.hasError('minlength')">Password must be at
+                                    least
+                                    10
+                                    characters long.</span>
                             </div>
                             <div *ngIf="this.myForm.get('cpassword')?.dirty && this.myForm.hasError('passwordsNotMatching')"
                                 class="error-message" class="form-text text-danger">Passwords are not matching.</div>
+
                         </div>
 
 
@@ -111,4 +114,3 @@
         </div>
     </div>
 </div>
-
