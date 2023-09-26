@@ -72,9 +72,21 @@ export class ResetPasswordComponent implements OnInit {
 
   updatePassword() {
     if (this.passwordForm.valid) {
-      console.log(this.passwordForm.value);
-      this.passwordForm.reset();
+      const formData = new FormData();
+      formData.append('new_password', this.passwordForm.get('new_password')?.value);
+      this.reset.resetPassword(formData).subscribe(
+        (response) => {
+          console.log('Backend responds:', response);
+          this.goodNot();
+          localStorage.removeItem('token');
+          this.rou.navigate(['/login']);
+        },
+        (error) => {
+          console.error('Error backend:', error);
+        }
+      );
     }
   }
+
 
 }

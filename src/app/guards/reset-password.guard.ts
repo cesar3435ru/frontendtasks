@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { UserService } from '../services/user.service';
 import Swal from 'sweetalert2'
-
+import { ResetPasswordService } from '../services/reset-password.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
-
-  constructor(private auth: UserService, private router: Router) { }
+export class ResetPasswordGuard implements CanActivate {
+  constructor(private auth: ResetPasswordService, private router: Router) { }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
@@ -35,4 +33,5 @@ export class AuthGuard implements CanActivate {
       timer: 1500
     })
   }
+
 }

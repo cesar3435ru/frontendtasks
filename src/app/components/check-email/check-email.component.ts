@@ -31,7 +31,9 @@ export class CheckEmailComponent implements OnInit {
     Swal.fire({
       icon: 'error',
       title: 'Oops...',
-      text: 'Something is wrong!'
+      text: 'Something is wrong!',
+      showConfirmButton: false,
+      timer: 1500
     })
   }
 
@@ -44,12 +46,42 @@ export class CheckEmailComponent implements OnInit {
 
   }
 
-  sendData() {
-    if (this.emailForm.valid) {
-      console.log(this.emailForm.value);
-      this.emailForm.reset();
-    }
-  }
+  // sendData() {
+  //   if (this.emailForm.valid) {
+  //     this.reset.checkEmail(this.emailForm.value).subscribe(
+  //       (datauser: any) => {
+  //         if (datauser) {
+  //           this.reset.saveToken(datauser.token);
+  //           this.emailForm.reset();
+  //           this.rou.navigate(['/reset-password']);
+  //           this.goodNot();
+  //         }
+  //       }, error => {
+  //         this.emailForm.reset();
+  //         this.badNot();
+  //         this.rou.navigate(['/verifyemail']);
+  //       }
+  //     )
+  //   }else{
+  //     Swal.fire('Error','Please enter a valid Email address!','warning')
+  //   }
+  // }
 
+  sendData() {
+    this.reset.checkEmail(this.emailForm.value).subscribe(
+      (datauser: any) => {
+        if (datauser) {
+          this.reset.saveToken(datauser.token);
+          this.emailForm.reset();
+          this.rou.navigate(['/reset-password']);
+          this.goodNot();
+        }
+      }, error => {
+        this.emailForm.reset();
+        this.badNot();
+        this.rou.navigate(['/verifyemail']);
+      }
+    )
+  }
 
 }

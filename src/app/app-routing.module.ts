@@ -11,6 +11,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { DuriesComponent } from './components/duries/duries.component';
 import { EdittaskComponent } from './components/edittask/edittask.component';
 import { CheckEmailComponent } from './components/check-email/check-email.component';
+import { ResetPasswordGuard } from './guards/reset-password.guard';
 
 const routes: Routes = [
   {
@@ -28,7 +29,8 @@ const routes: Routes = [
   },
   {
     path: 'reset-password',
-    component: ResetPasswordComponent
+    component: ResetPasswordComponent,
+    canActivate: [ResetPasswordGuard]
   },
   {
     path: 'verifyemail',
