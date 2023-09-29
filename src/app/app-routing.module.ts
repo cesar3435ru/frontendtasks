@@ -12,6 +12,7 @@ import { DuriesComponent } from './components/duries/duries.component';
 import { EdittaskComponent } from './components/edittask/edittask.component';
 import { CheckEmailComponent } from './components/check-email/check-email.component';
 import { ResetPasswordGuard } from './guards/reset-password.guard';
+import { GraphicComponent } from './components/graphic/graphic.component';
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent
+  },
+  {
+    path: 'gra',
+    component: GraphicComponent
   },
   {
     path: 'reset-password',

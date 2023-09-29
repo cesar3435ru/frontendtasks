@@ -31,6 +31,8 @@ import { DuriesComponent } from './components/duries/duries.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { EdittaskComponent } from './components/edittask/edittask.component';
 import { CheckEmailComponent } from './components/check-email/check-email.component';
+import { GraphicComponent } from './components/graphic/graphic.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 
@@ -48,7 +50,8 @@ import { CheckEmailComponent } from './components/check-email/check-email.compon
     ResetPasswordComponent,
     DuriesComponent,
     EdittaskComponent,
-    CheckEmailComponent
+    CheckEmailComponent,
+    GraphicComponent
   ],
   imports: [
     BrowserModule,
@@ -70,8 +73,8 @@ import { CheckEmailComponent } from './components/check-email/check-email.compon
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
-    NgxPaginationModule
-
+    NgxPaginationModule,
+    NgApexchartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
