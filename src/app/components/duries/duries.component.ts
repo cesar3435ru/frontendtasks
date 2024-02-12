@@ -50,7 +50,6 @@ export class DuriesComponent implements OnInit {
   ngOnDestroy(): void {
     this.taskAddedSubscription.unsubscribe();
     this.taskDeletedSubscription.unsubscribe();
-
   }
 
   showTasks() {

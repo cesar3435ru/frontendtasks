@@ -65,8 +65,6 @@ export class NavigationComponent implements OnInit{
     const userL = JSON.parse(localStorage.getItem('user') || '[]');
     this.userData = userL;
     console.log(this.userData);
-
-
   }
 
 
