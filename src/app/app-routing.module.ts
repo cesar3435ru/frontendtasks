@@ -13,6 +13,7 @@ import { EdittaskComponent } from './components/edittask/edittask.component';
 import { CheckEmailComponent } from './components/check-email/check-email.component';
 import { ResetPasswordGuard } from './guards/reset-password.guard';
 import { GraphicComponent } from './components/graphic/graphic.component';
+import { AccessGuard } from './guards/access.guard';
 
 const routes: Routes = [
   {
@@ -22,7 +23,9 @@ const routes: Routes = [
   },
   {
     path: 'login', // Ruta predeterminada
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [AuthGuard]
+
   },
   {
     path: 'register',
@@ -52,29 +55,30 @@ const routes: Routes = [
       {
         path: 'tasks',
         component: TasksComponent,
-        canActivate: [AuthGuard]
+        // canActivate: [AuthGuard]
 
       },
       {
         path: 'profile',
         component: ProfileComponent,
-        canActivate: [AuthGuard]
+        // canActivate: [AuthGuard]
 
       },
       {
         path: 'duries',
         component: DuriesComponent,
-        canActivate: [AuthGuard]
+        // canActivate: [AuthGuard]
 
       },
       {
         path: 'edittask/:id',
         component: EdittaskComponent,
-        canActivate: [AuthGuard]
+        // canActivate: [AuthGuard]
 
       },
     ],
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
+    canActivate: [AccessGuard]
 
 
   },

@@ -9,21 +9,20 @@ import Swal from 'sweetalert2'
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
+export class AccessGuard implements CanActivate {
 
   constructor(private auth: UserService, private router: Router) { }
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-    const resp = this.auth.isAuth();
+    const response = this.auth.isAuth();
 
-    if (resp) {
-      console.log('Access allowed', resp);
-      this.router.navigate(['/home']);
+    if (response) {
+      console.log('Access allowed', response);
     } else {
       console.log('No access');
-      // this.router.navigateByUrl('/login');
+      this.router.navigateByUrl('/login');
       // this.alertError();
     }
     return true;
