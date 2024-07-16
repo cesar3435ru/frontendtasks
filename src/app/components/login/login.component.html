@@ -1,60 +1,58 @@
 <div class="login-component">
-    <br>
-    <div class="container">
-        <div class="card" style="width: 20rem;">
-            <!-- <img src="https://jobsaca.com.cy/wp-content/uploads/2015/05/icon-user-default.png" class="card-img-top"
+  <br>
+  <div class="container">
+    <div class="card" style="width: 20rem;">
+      <!-- <img src="https://jobsaca.com.cy/wp-content/uploads/2015/05/icon-user-default.png" class="card-img-top"
             alt="..."> -->
-            <img src="/assets/images/checklist.svg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <form [formGroup]="loginForm" (ngSubmit)="startLogin()" class="row g-2">
-                    <div class="form-floating col-md-12">
-                        <input type="email" class="form-control" placeholder="Write your email" name="email" id="email"
-                            autocomplete="email" formControlName="email" maxlength="50">
-                        <label for="email">Email*</label>
-                        <div *ngIf="validInput('email')" class="form-text text-danger">Email is required.
-                        </div>
-                    </div>
-
-                    <a class="leftText" routerLink="/verifyemail" [routerLinkActive]="['active']">Forgot your
-                        password?</a>
-
-                    <div class="form-floating col-md-12">
-                        <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
-                            class="form-control" placeholder="Write your password" id="password">
-                        <span class="toggle-password effect-eye" (click)="togglePassword()">
-                            <i [class]="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
-                        </span>
-                        <label for="password">Password*</label>
-                        <div *ngIf="validInput('password')" class="form-text text-danger">
-                            <span *ngIf="loginForm.get('password')?.hasError('required')">Password is required.</span>
-                            <span *ngIf="loginForm.get('password')?.hasError('minlength')">Password must be at least 10
-                                characters long.</span>
-                        </div>
-
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Remember me
-                        </label>
-                    </div>
-                    <div class="d-grid gap-2">
-                        <button type="submit" class="btn btn-outline-primary" [disabled]="loginForm.invalid"> <i
-                                class="fa-solid fa-cloud"></i> Login</button>
-                    </div>
-                    <div class="centerText">
-                        <br>
-                        <a routerLink="/register" [routerLinkActive]="['active']">Don't have an account?</a>
-                        <br>
-                        <a routerLink="/gra" [routerLinkActive]="['active']">Graphic</a>
-                    </div>
-
-                </form>
+      <img src="/assets/images/checklist.svg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <form [formGroup]="loginForm" (ngSubmit)="startLogin()" class="row g-2">
+          <div class="form-floating col-md-12">
+            <input type="email" class="form-control" placeholder="Write your email" name="email" id="email"
+              autocomplete="email" formControlName="email" maxlength="50">
+            <label for="email">Email*</label>
+            <div *ngIf="validInput('email')" class="form-text text-danger">Email is required.
             </div>
-        </div>
+          </div>
 
+          <a class="leftText" routerLink="/verifyemail" [routerLinkActive]="['active']">Forgot your
+            password?</a>
+
+          <div class="form-floating col-md-12">
+            <input [type]="showPassword ? 'text' : 'password'" formControlName="password" class="form-control"
+              placeholder="Write your password" id="password">
+            <span class="toggle-password effect-eye" (click)="togglePassword()">
+              <i [class]="showPassword ? 'fas fa-eye' : 'fas fa-eye-slash'"></i>
+            </span>
+            <label for="password">Password*</label>
+            <div *ngIf="validInput('password')" class="form-text text-danger">
+              <span *ngIf="loginForm.get('password')?.hasError('required')">Password is required.</span>
+              <span *ngIf="loginForm.get('password')?.hasError('minlength')">Password must be at least 10
+                characters long.</span>
+            </div>
+
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+              Remember me
+            </label>
+          </div>
+          <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-outline-primary" [disabled]="loginForm.invalid"> <i
+                class="fa-solid fa-cloud"></i> Login</button>
+          </div>
+          <div class="centerText">
+            <br>
+            <a routerLink="/register" [routerLinkActive]="['active']">Don't have an account?</a>
+          </div>
+
+        </form>
+      </div>
     </div>
-    <br>
-    <br>
-    <br>
+
+  </div>
+  <br>
+  <br>
+  <br>
 </div>
