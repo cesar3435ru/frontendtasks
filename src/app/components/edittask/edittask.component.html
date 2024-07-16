@@ -4,36 +4,9 @@
         <div class="col-md-12">
             <div class="card twocolors">
                 <div class="card-body">
-                    <a routerLink="/home/duries" [routerLinkActive]="['active']" class="custom-tooltip"
-                        data-tooltip="Back bro"><i class="fa-solid fa-left-long btn btn-outline-secondary"></i>
-                    </a>
-                    <div>
-                        <h1 class="center">Update any information, just fill the inputs.</h1>
-                    </div>
-                    <form [formGroup]="taskForm" (ngSubmit)="updateTask()" class="row g-2">
-                        <div class="form-floating col-md-6">
-                            <input type="text" class="form-control" id="name" autocomplete="true" formControlName="name"
-                                placeholder="Write your task">
-                            <label for="name">Task Name*</label>
-                            <div *ngIf="validateInput('name')" class="form-text text-danger">Task Name is required.
-                            </div>
-                        </div>
 
-                        <div class="form-floating col-md-6">
-                            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea"
-                                formControlName="desc"></textarea>
-                            <label for="floatingTextarea">Description</label>
-                            <div *ngIf="validateInput('desc')" class="form-text text-danger">Description Task is
-                                required.
-                            </div>
-                        </div>
+                    
 
-                        <div class="d-grid gap-2">
-                            <br>
-                            <button type="submit" class="btn btn-outline-primary" [disabled]="taskForm.invalid"> <i
-                                    class="fa-solid fa-spinner"></i> Update</button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
